@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sample-job
+spec:
+  template:
+    spec:
+      initContainers:
+      - name: init-container
+        image: <init-container-image>
+        command:
+        - "<init-command>"
+      containers:
+      - name: main-container
+        image: <main-container-image>
+        command:
+        - "<main-command>"
+  backoffLimit: 5

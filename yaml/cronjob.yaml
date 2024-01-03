@@ -1,0 +1,38 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: job1
+spec:
+  schedule: "0 2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: job1
+        spec:
+          containers:
+          - name: job1-container
+            image: image1:latest
+            command: ["command1"]
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: job2
+spec:
+  schedule: "0 4 * * 5"
+  startingDeadlineSeconds: 3600
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: job2
+        spec:
+          containers:
+          - name: job2-container
+            image: image2:latest
+            command: ["command2"]
+          restartPolicy: OnFailure

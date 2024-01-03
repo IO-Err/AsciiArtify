@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-with-readinessprobe
+spec:
+  containers:
+  - name: main-container
+    image: my-image
+    readinessProbe:
+      httpGet:
+        path: /healthr
+        port: 80
+      initialDelaySeconds: 10
+      periodSeconds: 5
